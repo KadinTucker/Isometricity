@@ -17,14 +17,14 @@ class IsometricSquare {
     public int[][] getVertices() {
         int[] verticesX = new int[4];
         int[] verticesY = new int[4];
-        verticesX[0] = centerX - (int) (Math.sin(angleFacing) * (double) diagonalLength);
+        verticesX[0] = centerX + diagonalLength;
         verticesX[1] = centerX;
-        verticesX[2] = centerX + (int) (Math.sin(angleFacing) * (double) diagonalLength);
+        verticesX[2] = centerX - diagonalLength;
         verticesX[3] = centerX;
         verticesY[0] = centerY;
-        verticesY[1] = centerY - diagonalLength;
+        verticesY[1] = centerY - (int) (Math.sin(angleFacing) * (double) diagonalLength);
         verticesY[2] = centerY;
-        verticesY[3] = centerY + diagonalLength;
+        verticesY[3] = centerY + (int) (Math.sin(angleFacing) * (double) diagonalLength);
         int[][] allVertices = {verticesX, verticesY};
         return allVertices;
     }
