@@ -1,10 +1,11 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
  * A JFrame to show isometric rectangles
  */
-class IsometricityWindow extends JFrame {
+class IsometricityWindow extends JFrame implements KeyListener {
 
     public IsometricSquareGrid squares; ///An isometric square grid object to be drawn
 
@@ -17,12 +18,38 @@ class IsometricityWindow extends JFrame {
     public IsometricityWindow(String title) {
         super(title);
         this.setVisible(true);
+        this.pack();
         this.setSize(500, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.squares = new IsometricSquareGrid(4, 4, 25, 100, 200);
+        this.squares = new IsometricSquareGrid(4, 4, 50, 100, 200);
+        this.squares.setAngle(0.46);
         this.squareColor = new Color(50, 100, 75);
         this.outlineColor = new Color(10, 40, 25);
+        this.addKeyListener(this);
     } 
+
+    /**
+     * Implement key listener methods
+     */
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    /**
+     * Up and down arrow keys modify angle of view
+     */
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+            this.squares.setAngle((this.squares.getAngle() + 0.01) % (Math.PI / 2));
+        } else if(e.getKeyCode() == KeyEvent.VK_UP) {
+            this.squares.setAngle((this.squares.getAngle() - 0.01) % (Math.PI / 2));
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 
     /**
      * Draws all pieces of the window
@@ -38,7 +65,6 @@ class IsometricityWindow extends JFrame {
                 g.fillPolygon(vertices[0], vertices[1], 4);
                 g.setColor(this.outlineColor);
                 g.drawPolygon(vertices[0], vertices[1], 4);
-                g.drawString("" + x + ", " + y, vertices[0][1], vertices[1][1]);
             }
         }
     }
@@ -50,12 +76,10 @@ class IsometricityWindow extends JFrame {
         IsometricityWindow display = new IsometricityWindow("Isometricity Tester");
         while(true) {
             try {
-                display.repaint();
                 Thread.sleep(17);
             } catch (Exception e) {
 
             }
-            display.squares.setAngle((display.squares.getAngle() + 0.005) % (Math.PI / 2));
             display.repaint();
         }
     }

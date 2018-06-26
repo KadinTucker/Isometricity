@@ -44,8 +44,8 @@ class IsometricSquareGrid {
     /**
      * Updates all items on the grid so that they fit with a new angle
      */
-    public void updateGrid(double newAngle) {
-        double diagonalMod = grid[0][0].diagonalLength * (1 - Math.tan((Math.PI / 2 - newAngle) / 2));
+    private void updateGrid(double newAngle) {
+        double diagonalMod = (grid[0][0].diagonalLength) * (1.0 - Math.tan((Math.PI / 2 - newAngle) / 2));
         for(int x = 0; x < grid.length; x++) {
             for(int y = 0; y < grid[x].length; y++) {
                 grid[x][y].angleFacing = newAngle;
