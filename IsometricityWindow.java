@@ -6,7 +6,10 @@ import javax.swing.*;
  */
 class IsometricityWindow extends JFrame {
 
-    public IsometricSquare square; ///An isometric square object to be drawn
+    public IsometricSquare[] squares; ///An isometric square object to be drawn
+
+    private Color squareColor; ///The color with which to draw the square
+    private Color outlineColor; ///The color with which to outline the square
 
     /**
      * Constructs a new window with the given title
@@ -16,7 +19,12 @@ class IsometricityWindow extends JFrame {
         this.setVisible(true);
         this.setSize(500, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.square = new IsometricSquare(0.52, 25, 75, 75); 
+        this.squares = new IsometricSquare[5];
+        for(int i = 0; i < squares.length; i++) {
+            squares[i] = new IsometricSquare(0.0, 25, 75, 50 + 50 * i);
+        } 
+        this.squareColor = new Color(50, 100, 75);
+        this.outlineColor = new Color(10, 40, 25);
     } 
 
     /**
@@ -26,9 +34,13 @@ class IsometricityWindow extends JFrame {
     public void paint(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, 500, 400);
-        g.setColor(Color.BLACK);
-        int[][] vertices = square.getVertices();
-        g.fillPolygon(vertices[1], vertices[0], 4);
+        for(IsometricSquare square : squares) {
+            int[][] vertices = square.getVertices();
+            g.setColor(this.squareColor);
+            g.fillPolygon(vertices[1], vertices[0], 4);
+            g.setColor(this.outlineColor);
+            g.drawPolygon(vertices[1], vertices[0], 4);
+        }
     }
 
     /**
@@ -42,7 +54,9 @@ class IsometricityWindow extends JFrame {
             } catch (Exception e) {
 
             }
-            display.square.angleFacing += 0.01;
+            for(IsometricSquare square : display.squares) {
+                square.angleFacing += 0.01;
+            }
             display.repaint();
         }
     }
