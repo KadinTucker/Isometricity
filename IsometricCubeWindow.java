@@ -46,6 +46,10 @@ class IsometricCubeWindow extends JFrame implements KeyListener {
             this.horizAngle = (this.horizAngle + 0.01);
         } else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
             if(this.horizAngle > 0.01) this.horizAngle = (this.horizAngle - 0.01);
+        } else if(e.getKeyCode() == KeyEvent.VK_UP) {
+            this.vertAngle = (this.vertAngle + 0.01);
+        } else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+            this.vertAngle = (this.vertAngle - 0.01);
         }
         fixAngle();
     }
@@ -73,13 +77,13 @@ class IsometricCubeWindow extends JFrame implements KeyListener {
         int[] verticesX = new int[4];
         int[] verticesY = new int[4];
         verticesX[0] = 50;
-        verticesX[1] = 50 + (int) (Math.sin(horizAngle) * (double) 50);;
-        verticesX[2] = 50 + (int) (Math.sin(horizAngle) * (double) 50);;
+        verticesX[1] = 50 + (int) (Math.sin(horizAngle) * 50.0);
+        verticesX[2] = 50 + (int) (Math.sin(horizAngle) * 50.0);
         verticesX[3] = 50;
-        verticesY[0] = 50;
-        verticesY[1] = 50;
-        verticesY[2] = 100;
-        verticesY[3] = 100;
+        verticesY[0] = 100;
+        verticesY[1] = 100 + (int) (Math.sin(vertAngle) * 50.0);
+        verticesY[2] = 150 + (int) (Math.sin(vertAngle) * 50.0);
+        verticesY[3] = 150;
         int[][] allVertices = {verticesX, verticesY};
         return allVertices;
     }
@@ -92,10 +96,10 @@ class IsometricCubeWindow extends JFrame implements KeyListener {
         verticesX[1] = verticesOfFirst[0][1] + (int) (Math.cos(horizAngle) * (double) 50);;
         verticesX[2] = verticesOfFirst[0][1] + (int) (Math.cos(horizAngle) * (double) 50);;
         verticesX[3] = verticesOfFirst[0][1];
-        verticesY[0] = 50;
-        verticesY[1] = 50;
-        verticesY[2] = 100;
-        verticesY[3] = 100;
+        verticesY[0] = 100 + (int) (Math.sin(vertAngle) * 50.0);
+        verticesY[1] = 100;
+        verticesY[2] = 150;
+        verticesY[3] = 150 + (int) (Math.sin(vertAngle) * 50.0);
         int[][] allVertices = {verticesX, verticesY};
         return allVertices;
     }
