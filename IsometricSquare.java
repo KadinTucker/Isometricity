@@ -31,9 +31,9 @@ class IsometricSquare {
         verticesX[2] = centerX - diagonalLength;
         verticesX[3] = centerX;
         verticesY[0] = centerY;
-        verticesY[1] = centerY - (int) (Math.sin(angleFacing) * (double) diagonalLength);
+        verticesY[1] = centerY - (int) ((Math.sin(angleFacing) * (double) diagonalLength));
         verticesY[2] = centerY;
-        verticesY[3] = centerY + (int) (Math.sin(angleFacing) * (double) diagonalLength);
+        verticesY[3] = centerY + (int) ((Math.sin(angleFacing) * (double) diagonalLength));
         int[][] allVertices = {verticesX, verticesY};
         return allVertices;
     }
